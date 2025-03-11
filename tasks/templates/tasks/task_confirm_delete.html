@@ -1,0 +1,22 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<div class="card shadow mx-auto" style="max-width: 500px;">
+    <div class="card-header bg-warning text-dark">
+        <h1 class="mb-0">Delete Task</h1>
+    </div>
+    <div class="card-body text-center">
+        <p class="lead">
+            {% block confirmation_message %}{% endblock %} 
+            Are you sure you want to delete "{{ object.title }}"?
+        </p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+                {% block confirm_button %}{% endblock %}
+                Yes, delete
+            </button>
+            <a href="{% url 'task_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

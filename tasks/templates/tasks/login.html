@@ -1,0 +1,24 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<div class="card shadow mx-auto" style="max-width: 500px;">
+    <div class="card-header bg-primary text-white">
+        <h1 class="mb-0">
+            {% block form_title %}{% endblock %}
+            Login
+        </h1>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary">
+                {% block submit_button %}{% endblock %}
+                Login
+            </button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'register' %}" class="btn btn-secondary">Register</a></p>
+    </div>
+</div>
+{% endblock %}

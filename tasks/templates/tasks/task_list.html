@@ -1,0 +1,41 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<div class="card shadow">
+    <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">Todo List</h3>
+    </div>
+    <div class="card-body">
+        <a href="{% url 'add_task' %}" class="btn btn-success mb-3">
+            <i class="bi bi-plus-circle"></i> Add Task
+        </a>
+
+        <div class="list-group">
+            {% for task in tasks %}
+                <div class="list-group-item {% if task.completed %}list-group-item-secondary{% endif %}">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-1 {% if task.completed %}text-decoration-line-through{% endif %}">
+                                {{ task.title }}
+                            </h5>
+                            <p class="mb-1 text-muted">{{ task.description }}</p>
+                            <small class="text-muted">Created: {{ task.created_at|date:"M d, Y" }}</small>
+                        </div>
+                        <div class="btn-group">
+                            {% if not task.completed %}
+                                <a href="{% url 'complete_task' task.pk %}" class="btn btn-sm btn-outline-success">
+                                    <i class="bi bi-check2">Complete</i>
+                                </a>
+                            {% endif %}
+                            <a href="{% url 'delete_task' task.pk %}" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash">Delete</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="alert alert-info">No tasks found. Add your first task!</div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

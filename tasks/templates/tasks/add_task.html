@@ -1,0 +1,21 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<div class="card shadow mx-auto" style="max-width: 500px;">
+    <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">{% block form_title %}{% endblock %}</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary">
+                {% block submit_button %}{% endblock %}
+                Add
+            </button>
+            <a href="{% url 'task_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

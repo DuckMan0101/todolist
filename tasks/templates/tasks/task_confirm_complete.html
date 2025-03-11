@@ -1,0 +1,19 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<div class="card shadow mx-auto" style="max-width: 500px;">
+    <div class="card-header bg-warning text-dark">
+        <h3 class="mb-0">Confirm Action</h3>
+    </div>
+    <div class="card-body text-center">
+        <p class="lead">{% block confirmation_message %}{% endblock %}</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+                {% block confirm_button %}{% endblock %}
+                Yes, mark as completed
+            </button>
+            <a href="{% url 'task_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
